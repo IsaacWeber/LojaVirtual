@@ -1,48 +1,37 @@
-class Produto:
-    def __init__(self, id=-1, nome='', marca='', categoria='', modelo='', cor='', preco=0.0, descricao=''):
-        self.id = id
-        self.nome = nome
-        self.marca = marca
-        self.categoria = categoria
-        self.modelo = modelo
-        self.cor = cor
-        self.preco = preco
-        self.descricao = descricao
+from api import ClienteApi
+from classes import Cliente
+from dados import clientes
 
-    def __str__(self):
-        return f'Produto: (Id: {self.id}, Nome: {self.nome})'
+# CLIENTE CRUD
+cliente_api = ClienteApi()
 
-class Cartao:
-    def __init__(self, id=-1, nome_cliente='', numero='', cvv=0, validade='', bandeira='', funcao=''):
-        self.id = id
-        self.nomeCliente = nome_cliente
-        self.numero = numero
-        self.cvv = cvv
-        self.validade = validade
-        self.bandeira = bandeira
-        self.funcao = funcao
+## GET: find all
+clientes_json = cliente_api.find_all()
+for cjson in clientes_json:
+   print(cjson)
 
-    def __str__(self):
-        return f'Cartão: (Id:{self.id}, Cliente: {self.nome_cliente})'
+## GET: find by id
+# cliente = cliente_api.find_by_id(3)
+# print(cliente)
 
-class Cliente:
-    def __init__(self, id=-1, nome='', sobrenome='', cpf='', email='', endereco='', membro_desde=''):
-        self.id = id
-        self.nome = nome
-        self.sobrenome = sobrenome
-        self.cpf = cpf
-        self.email = email
-        self.endereco = endereco
-        self.membro_desde = membro_desde
+## POST: post
+# cliente = Cliente('Maradona', 'Marques')
+# cliente.id = 6
+# print(cliente_api.post(cliente))
 
-    def __str__(self):
-        return f'Cliente: (Id: {self.id}, Nome: {self.nome})'
+## DELETE: delete by id
+#print(cliente_api.delete_by_id(2))
 
-c = Cliente(2, 'NICOLAS', 'KALEB', '70714132152', 'nicolaspbbr@gmail.com', 'AGUAS LINDAS PEROLA 1', '20/05/2025')
-print(f'{c.sobrenome}, {c.cpf}, {c.email}, {c.endereco}, {c.membro_desde}')
+## DELETE: delete all
+# print(cliente_api.delete_all())
 
-
-
-
-
-
+## UPDATE: update
+# c = clientes[0]
+#
+# c.nome = 'jackson'
+# c.sobrenome = 'mariano'
+# c.cpf = '782.234.324-62'
+# c.email = 'jacksonmariano@gmail.com'
+# c.endereco = 'Rua 10, Casa 05 Lago Azul - GO'
+#
+# print(cliente_api.update(c))
